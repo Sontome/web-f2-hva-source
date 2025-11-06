@@ -276,7 +276,7 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
               onCheckedChange={handleSwitchChange}
             />
             <Label htmlFor="guiChung">{formData.guiChung ? 'Gửi chung' : 'Gửi riêng từng Pax'}</Label>
-            <div> 
+            <div className="flex justify-end w-full"> 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button type="button" variant="outline" className="min-w-[120px]">
