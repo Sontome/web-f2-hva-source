@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
@@ -30,7 +31,8 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
     sdt: '',
     guiChung: true,
     pnrs: '',
-    banner:''
+    banner:'',
+    type: 0,
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -87,7 +89,8 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
       sdt: '',
       guiChung: true,
       pnrs: '',
-      banner:''
+      banner:'',
+      type: 0,
     });
     onClose();
   };
@@ -126,7 +129,8 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
             xungHo: formData.xungHo,
             sdt: formData.sdt,
             guiChung: formData.guiChung,
-            banner:formData.banner
+            banner:formData.banner,
+            type: formData.type
           }
         ]
       };
@@ -273,7 +277,24 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
             />
             <Label htmlFor="guiChung">{formData.guiChung ? 'Gửi chung' : 'Gửi riêng từng Pax'}</Label>
           </div>
-
+          <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button type="button" variant="outline" className="min-w-[120px]">
+                  {formData.type === 0 ? 'Cơ bản' : formData.type === 1 ? 'IT FARE' : 'FULL'}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-background z-50">
+                <DropdownMenuItem onClick={() => setFormData(prev => ({ ...prev, type: 0 }))}>
+                  Cơ bản
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setFormData(prev => ({ ...prev, type: 1 }))}>
+                  IT FARE
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setFormData(prev => ({ ...prev, type: 2 }))}>
+                  FULL
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           <div className="flex justify-end space-x-2 pt-4">
             <Button type="button" variant="outline" onClick={handleClose}>
               Hủy
