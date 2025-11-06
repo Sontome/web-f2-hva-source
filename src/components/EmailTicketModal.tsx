@@ -276,8 +276,7 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
               onCheckedChange={handleSwitchChange}
             />
             <Label htmlFor="guiChung">{formData.guiChung ? 'Gửi chung' : 'Gửi riêng từng Pax'}</Label>
-          </div>
-          <DropdownMenu>
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button type="button" variant="outline" className="min-w-[120px]">
                   {formData.type === 0 ? 'Cơ bản' : formData.type === 1 ? 'IT FARE' : 'FULL'}
@@ -295,6 +294,8 @@ export const EmailTicketModal = ({ isOpen, onClose }: EmailTicketModalProps) => 
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          </div>
+          
           <div className="flex justify-end space-x-2 pt-4">
             <Button type="button" variant="outline" onClick={handleClose}>
               Hủy
