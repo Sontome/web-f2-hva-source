@@ -411,17 +411,16 @@ export default function Index() {
       )}
 
       {showContent && (
-        <EmailTicketModal 
-          isOpen={isEmailModalOpen} 
-          onClose={() => setIsEmailModalOpen(false)} 
-        />
-      )}
-      {showContent && (
-        <PNRCheckModal 
-          isOpen={showPNRModal} 
-          onClose={() => setShowPNRModal(false)} 
-        />
-      )}
+        <>
+          <EmailTicketModal 
+            isOpen={isEmailModalOpen} 
+            onClose={() => setIsEmailModalOpen(false)} 
+          />
+          <PNRCheckModal 
+            isOpen={showPNRModal} 
+            onClose={() => setShowPNRModal(false)} 
+          />
+         
           {selectedFlight?.airline === 'VJ' && selectedFlight?.bookingKey && (
             <VJBookingModal
               isOpen={showVJBookingModal}
@@ -443,6 +442,9 @@ export default function Index() {
               }}
             />
           )}
+          
+        </>
+      )}
       <InkSplashEffect
         isActive={reverseInkSplash.active}
         x={reverseInkSplash.x}
