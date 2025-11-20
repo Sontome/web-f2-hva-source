@@ -358,7 +358,7 @@ export default function Index() {
                       VietJet ({vjFlights.length} chuyến bay)
                     </h3>
                     <div className="space-y-4">
-                      {vjFlights.map(flight => <FlightCard key={flight.id} flight={flight} priceMode="Page" />)}
+                      {vjFlights.map(flight => <FlightCard key={flight.id} flight={flight} priceMode="Page" onHoldTicket={handleHoldTicket}  />)}
                     </div>
                   </div>}
               </div>
