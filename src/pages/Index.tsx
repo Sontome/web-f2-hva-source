@@ -106,6 +106,7 @@ export default function Index() {
     smoothScrollTo(0, 1000); // Use custom smooth scroll for scroll to top too
   };
   const handleHoldTicket = (flight: Flight) => {
+    console.log('selected flight:', flight); 
     setSelectedFlight(flight);
     if (flight.airline === 'VJ') {
       setShowVJBookingModal(true);
