@@ -9,7 +9,7 @@ import { PNRCheckModal } from '../components/PNRCheckModal';
 import { EmailTicketModal } from '@/components/EmailTicketModal';
 import { InkSplashEffect } from '@/components/InkSplashEffect';
 import { ArrowUp, Mail } from 'lucide-react';
-
+import { BookingModal as VJBookingModal } from '@/components/VJBookingModal';
 export default function Index() {
   const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState(false);
@@ -21,6 +21,7 @@ export default function Index() {
   const [showContent, setShowContent] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
   const [showPNRModal, setShowPNRModal] = useState(false);
+  const [showVJBookingModal, setShowVJBookingModal] = useState(false);
   const [filters, setFilters] = useState<FilterOptions>({
     airlines: ['VJ', 'VNA'],
     showCheapestOnly: true,
@@ -102,6 +103,12 @@ export default function Index() {
 
   const scrollToTop = () => {
     smoothScrollTo(0, 1000); // Use custom smooth scroll for scroll to top too
+  };
+  const handleHoldTicket = (flight: Flight) => {
+    setSelectedFlight(flight);
+    if (flight.airline === 'VJ') {
+      setShowVJBookingModal(true);
+    } 
   };
 
   const playNotificationSound = () => {
@@ -415,7 +422,27 @@ export default function Index() {
           onClose={() => setShowPNRModal(false)} 
         />
       )}
-
+          {selectedFlight?.airline === 'VJ' && selectedFlight?.bookingKey && (
+            <VJBookingModal
+              isOpen={showVJBookingModal}
+              onClose={() => {
+                setShowVJBookingModal(false);
+                setSelectedFlight(null);
+              }}
+              bookingKey={selectedFlight.bookingKey}
+              bookingKeyReturn={selectedFlight.bookingKeyReturn}
+              tripType={selectedFlight.return ? 'RT' : 'OW'}
+              departureAirport={selectedFlight.departure.airport}
+              maxSeats={selectedFlight.availableSeats}
+              onBookingSuccess={(pnr) => {
+                console.log('Booking success:', pnr);
+                toast({
+                  title: "Giữ vé thành công!",
+                  description: `Mã giữ vé: ${pnr}`,
+                });
+              }}
+            />
+          )}
       <InkSplashEffect
         isActive={reverseInkSplash.active}
         x={reverseInkSplash.x}
