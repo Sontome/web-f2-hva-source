@@ -22,6 +22,7 @@ export default function Index() {
   const resultsRef = useRef<HTMLDivElement>(null);
   const [showPNRModal, setShowPNRModal] = useState(false);
   const [showVJBookingModal, setShowVJBookingModal] = useState(false);
+  const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [filters, setFilters] = useState<FilterOptions>({
     airlines: ['VJ', 'VNA'],
     showCheapestOnly: true,
